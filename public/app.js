@@ -6,26 +6,27 @@
 //     }
 // });
 console.log("app.js file is hit")
-$(document).ready(function() {
-    $(document).on("click", ".submit", function() {
+$(document).ready(function () {
+    $(document).on("click", ".submit", function () {
         let _id = $(this).data("id");
         console.log(_id);
         // Axios.post(`/api/note/${_id}`, function() {
 
         // })
-        let noteBody = $("textarea").val().trim();
+        let note = $("textarea").val().trim();
+        console.log(note);
         $.ajax({
             method: "POST",
             url: "/api/note/" + _id,
-            data: noteBody
-          })
+            data: { note: note }
+        })
             // With that done
-            .then(function(data) {
-              // Log the response
-              console.log(data);
-              console.log("post route success")
-              // Empty the notes section
-              $("#exampleFormControlTextarea1").empty();
+            .then(function (data) {
+                // Log the response
+                console.log(data);
+                console.log("post route success")
+                // Empty the notes section
+                $("#exampleFormControlTextarea1").empty();
             });
     })
 })

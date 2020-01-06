@@ -69,17 +69,17 @@ app.get("/", function (req, res) {
                 }
                 console.log("results before db call in server.js", results)
                 let duplicates = await db.Article.find({ title: results.title })
-                        if (duplicates.length > 0) {
-                            console.log("this entry already exists");
-                            console.log("duplicates: ", duplicates);
-                        } else {
-                            // insert db.Article.create from below
-                            let dbArticle = await db.Article.create(results);
-                                    // View the added result in the console
-                                    console.log("line 66 server.js", dbArticle);
-                                    // If an error occurred, log it
-                        }
-                    
+                if (duplicates.length > 0) {
+                    console.log("this entry already exists");
+                    console.log("duplicates: ", duplicates);
+                } else {
+                    // insert db.Article.create from below
+                    let dbArticle = await db.Article.create(results);
+                    // View the added result in the console
+                    console.log("line 66 server.js", dbArticle);
+                    // If an error occurred, log it
+                }
+
                 // Create a new Article using the `result` object built from scraping
             });
             console.log("this comes just before res.render")
@@ -98,21 +98,23 @@ app.get("/", function (req, res) {
 });
 
 app.post("/api/note/:id", function (req, res) {
+    console.log(req.body);
     db.Note
-    .create(req.body, function(err, doc) {
-        if (err) {
+        .create(req.body)
+        .then(function (dbNote) {
+            return db.Article.findOneAndUpdate({ _id: req.params.id },
+                { note: dbNote._id },
+                { new: true }
+            );
+        })
+        .then(function (dbArticle) {
+            console.log(dbArticle)
+            res.redirect("/");
+        })
+        .catch(function(err) {
             res.json(err);
-        }
-        db.Article.findOneAndUpdate({ _id: req.params.id }, 
-            { note: doc._id}, 
-            {new: true}, 
-            function(error, updatedDoc) {
-            if (error) {
-              res.json(error);
-            }
-            res.json(updatedDoc)
-          });
-    });
+        })
+        
 });
 
 app.listen(PORT, function () {
