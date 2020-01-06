@@ -1,0 +1,24 @@
+<header>
+    <h1 class="jumbotron">News Scraper</h1>
+</header>
+<div class="container">
+    <div class="row">
+        {{#each data}}
+        <div class="articles">
+            <h1>Title: {{title}}</h1>
+            <h2>Summary: {{summary}}</h2>
+            <p>Link: {{link}}</p>
+        </div>
+
+        <div class="notes">
+            <form action="">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Write comment here</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="button" class="submit" data-id="{{_id}}" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        {{/each}}
+    </div>
+</div>
