@@ -23,7 +23,7 @@ $(document).ready(function () {
             // With that done
             .then(function (data) {
                 // Log the response
-                console.log(data);
+                // console.log(data);
                 console.log("post route success")
                 // Empty the notes section
                 $("#exampleFormControlTextarea1").empty();

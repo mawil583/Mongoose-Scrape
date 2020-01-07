@@ -112,9 +112,9 @@ app.post("/api/note/:id", function (req, res) {
             res.redirect("/");
         })
         .catch(function(err) {
-            res.json(err);
+            res.json(err)
         })
-        
+        ;
 });
 
 app.listen(PORT, function () {
