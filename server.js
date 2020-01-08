@@ -109,7 +109,8 @@ app.post("/api/note/:id", function (req, res) {
         })
         .then(function (dbArticle) {
             console.log(dbArticle)
-            res.redirect("/");
+          
+            res.render("index", dbArticle);
         })
         .catch(function(err) {
             res.json(err)
