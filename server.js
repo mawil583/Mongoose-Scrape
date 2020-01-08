@@ -29,8 +29,12 @@ app.use(express.static("public"));
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI);
 
+app.get("/", function(req, res) {
+    console.log("hello world");
+})
+
 // A GET route for scraping the APnews website
-app.get("/", function (req, res) {
+app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with axios
     console.log("in root path before axios call");
 
