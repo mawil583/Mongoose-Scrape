@@ -18,10 +18,10 @@ var articleSchema = new Schema({
         required: true,
         unique: true
     },
-    note: {
+    note: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    }
+    }]
 });
 
 var Article = mongoose.model("Article", articleSchema);

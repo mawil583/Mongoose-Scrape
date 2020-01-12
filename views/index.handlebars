@@ -14,14 +14,19 @@
             <form action="">
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Write comment here</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="{{_id}}" rows="3"></textarea>
                 </div>
                 <button type="button" class="submit" data-id="{{_id}}" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        
         <div class="container">
             <div class="row">
+                {{#each note}}
                 Notes comments go here 
+                    {{note}}
+                    <br>
+                {{/each}}
             </div>
         </div>
         {{/each}}

@@ -88,7 +88,9 @@ app.get("/", function (req, res) {
             // Send a message to the client
             // res.send("Scrape Complete");
             db.Article.find({})
+                .populate('note')
                 .then(function (dbArticles) {
+                    console.log(dbArticles);
                     let articles = {
                         data: dbArticles.slice(0, 25)
                     }
@@ -104,19 +106,22 @@ app.post("/api/note/:id", function (req, res) {
         .create(req.body)
         .then(function (dbNote) {
             return db.Article.findOneAndUpdate({ _id: req.params.id },
-                { note: dbNote._id },
+                { $push: { note: dbNote._id }},
                 { new: true }
             );
         })
         .then(function (dbArticle) {
-            console.log(dbArticle)
-          
-            res.render("index", dbArticle);
+            console.log("updated Article collection");
+
+            // let notesData = {
+            //     notes: dbArticle
+            // }
+            
+            res.render("index", notesData);
         })
         .catch(function(err) {
             res.json(err)
-        })
-        ;
+        });
 });
 
 app.listen(PORT, function () {
