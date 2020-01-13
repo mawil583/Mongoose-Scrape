@@ -77,7 +77,7 @@ app.get("/", function (req, res) {
                     // insert db.Article.create from below
                     let dbArticle = await db.Article.create(results);
                     // View the added result in the console
-                    console.log("line 66 server.js", dbArticle);
+                    console.log("line 80 server.js", dbArticle);
                     // If an error occurred, log it
                 }
 

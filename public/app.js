@@ -7,7 +7,7 @@
 // });
 console.log("app.js file is hit")
 $(document).ready(function () {
-    
+
 
     $(document).on("click", ".submit", function () {
         let _id = $(this).data("id");
@@ -17,6 +17,8 @@ $(document).ready(function () {
         // })
         
         let note = $("#" + _id).val().trim();
+
+        $("#note" + _id).append(note);
         console.log(note);
         $.ajax({
             method: "POST",
